@@ -1,0 +1,29 @@
+[metadata]
+name = django-umami
+version = 0.0.2
+description = A django package to connect to umami for tracking actions
+long_description = A django package to connect to umami for tracking actions
+url = https://github.com/TreyWW/django-umami
+author = TreyWW
+author_email = trey@strelix.org
+license = MIT
+classifiers =
+    Environment :: Web Environment
+    Framework :: Django
+    Intended Audience :: Developers
+    License :: OSI Approved :: BSD License
+    Operating System :: OS Independent
+    Programming Language :: Python
+    Programming Language :: Python :: 3
+    Programming Language :: Python :: 3 :: Only
+    Programming Language :: Python :: 3.10
+    Programming Language :: Python :: 3.11
+    Programming Language :: Python :: 3.12
+    Topic :: Internet :: WWW/HTTP
+    Topic :: Internet :: WWW/HTTP :: Dynamic Content
+
+[options]
+include_package_data = true
+packages = find:
+python_requires = >=3.10
+install_requires = Django >= 3.2

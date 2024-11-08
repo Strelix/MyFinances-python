@@ -21,3 +21,12 @@ class InvoicesService(BaseService):
     def list_invoices(self) -> MyFinancesResponse[InvoiceList]:
         response = self._client._get(f"/invoices/")
         return MyFinancesResponse(**response.dict())
+
+
+    def get_invoice(self, invoice_id: int) -> MyFinancesResponse[InvoiceList]:
+        response = self._client._get(f"/invoices/{invoice_id}/")
+        return MyFinancesResponse(**response.dict())
+
+    def delete_invoice(self, invoice_id: int) -> MyFinancesResponse[InvoiceList]:
+        response = self._client._delete(f"/invoices/{invoice_id}/delete")
+        return MyFinancesResponse(**response.dict())

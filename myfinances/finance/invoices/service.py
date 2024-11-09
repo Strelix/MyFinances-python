@@ -27,6 +27,30 @@ class InvoicesService(BaseService):
         response = self._client._get(f"/invoices/{invoice_id}/")
         return MyFinancesResponse(**response.dict())
 
+
     def delete_invoice(self, invoice_id: int) -> MyFinancesResponse[InvoiceList]:
         response = self._client._delete(f"/invoices/{invoice_id}/delete")
+        return MyFinancesResponse(**response.dict())
+
+    def search_invoices(self, customer_id: int = None, status: str = None) -> MyFinancesResponse[InvoiceList]:
+        params = {
+            "customer_id": customer_id,
+            "status": status
+        }
+
+        params = {key: value for key, value in params.items() if value is not None}
+
+        response = self._client._get(f"/invoices/search", params=params)
+        return MyFinancesResponse(**response.dict())
+
+    def update_invoice(self, invoice_id: int, amount: float = None, description: str = None, due_date: str = None ) -> MyFinancesResponse[CreateInvoiceResponse]:
+        payload = {
+            "amount": amount,
+            "description": description,
+            "due_date": due_date,
+        }
+
+        payload = {key: value for key, value in payload.items() if value is not None }
+
+        response = self._client._post(f"/invoices/{invoice_id}update", json=payload)
         return MyFinancesResponse(**response.dict())

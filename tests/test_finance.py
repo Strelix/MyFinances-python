@@ -25,6 +25,7 @@ def test_create_invoice(invoices_service):
         "description": "Service Fee"
     }
     mock_response.status_code = 200
+
     invoices_service._client.session.post.return_value = mock_response
 
     invoice = invoices_service.create_invoice(customer_id=123, amount=250.0, description="Service Fee")

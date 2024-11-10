@@ -3,7 +3,7 @@ from typing import Optional
 from pydantic import EmailStr
 
 from myfinances.base_service import BaseService
-from myfinances.clients.models import ClientIdResponse, ClientData
+from myfinances.clients.models import ClientIdResponse, ClientData, Client
 from myfinances.models import MyFinancesResponse
 
 
@@ -50,4 +50,9 @@ class ClientsService(BaseService):
 
         response = self._client._post("/clients/create/", params)
 
+        return MyFinancesResponse(**response.dict())
+
+
+    def get_client(self, client_id:int) -> MyFinancesResponse[Client]:
+        response = self._client.get(f"/clients/{client_id}")
         return MyFinancesResponse(**response.dict())

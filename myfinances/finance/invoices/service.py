@@ -1,5 +1,5 @@
 from myfinances.base_service import BaseService
-from myfinances.finance.invoices.models import InvoiceList, CreateInvoiceResponse
+from myfinances.finance.invoices.models import InvoiceList, CreateInvoiceResponse, Invoice
 from myfinances.models import MyFinancesResponse
 
 
@@ -23,7 +23,7 @@ class InvoicesService(BaseService):
         return MyFinancesResponse(**response.dict())
 
 
-    def get_invoice(self, invoice_id: int) -> MyFinancesResponse[InvoiceList]:
+    def get_invoice(self, invoice_id: int) -> MyFinancesResponse[Invoice]:
         response = self._client._get(f"/invoices/{invoice_id}/")
         return MyFinancesResponse(**response.dict())
 

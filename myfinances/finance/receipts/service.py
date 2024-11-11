@@ -31,3 +31,7 @@ class ReceiptService(BaseService):
         response = self._client._post("/receipts/create/", json=params)
 
         return MyFinancesResponse(**response.dict())
+
+    def list_receipts(self) -> MyFinancesResponse[ReceiptList]:
+        response = self._client._get(f"/receipts/list/")
+        return MyFinancesResponse(**response.dict())

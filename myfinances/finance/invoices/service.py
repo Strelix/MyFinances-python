@@ -17,16 +17,13 @@ class InvoicesService(BaseService):
 
         return MyFinancesResponse(**response.dict())
 
-
     def list_invoices(self) -> MyFinancesResponse[InvoiceList]:
         response = self._client._get(f"/invoices/")
         return MyFinancesResponse(**response.dict())
 
-
     def get_invoice(self, invoice_id: int) -> MyFinancesResponse[Invoice]:
         response = self._client._get(f"/invoices/{invoice_id}/")
         return MyFinancesResponse(**response.dict())
-
 
     def delete_invoice(self, invoice_id: int) -> MyFinancesResponse[InvoiceList]:
         response = self._client._delete(f"/invoices/{invoice_id}/delete")
@@ -52,5 +49,5 @@ class InvoicesService(BaseService):
 
         payload = {key: value for key, value in payload.items() if value is not None }
 
-        response = self._client._post(f"/invoices/{invoice_id}update", json=payload)
+        response = self._client._post(f"/invoices/{invoice_id}/update", json=payload)
         return MyFinancesResponse(**response.dict())

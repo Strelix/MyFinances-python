@@ -56,3 +56,34 @@ class ClientsService(BaseService):
     def get_client(self, client_id:int) -> MyFinancesResponse[Client]:
         response = self._client.get(f"/clients/{client_id}")
         return MyFinancesResponse(**response.dict())
+
+    def update_client(self,
+                      name: str,
+                      phone_number: Optional[str] = None,
+                      email: Optional[EmailStr] = None,
+                      company: Optional[str] = None,
+                      contact_method: Optional[str] = None,
+                      is_representative: bool = False,
+                      address: Optional[str] = None,
+                      city: Optional[str] = None,
+                      country: Optional[str] = None) -> MyFinancesResponse[ClientIdResponse]:
+        params = {
+            "name": name,
+            "phone_number": phone_number,
+            "email": email,
+            "company": company,
+            "contact_method": contact_method,
+            "is_representative": is_representative,
+            "address": address,
+            "city": city,
+            "country": country,
+        }
+
+        params = {key: value for key, value in params.items() if value is not None}
+
+        response = self._client._put("/clients/update/", params)
+        return MyFinancesResponse(**response.dict())
+
+    def delete_client(self, client_id: int) -> MyFinancesResponse[ClientData]:
+        response = self._client._delete(f"/clients/{client_id}/delete")
+        return MyFinancesResponse(**response.dict())

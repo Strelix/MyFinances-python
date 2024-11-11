@@ -5,7 +5,7 @@ from typing import Optional, List
 class Receipt(BaseModel):
     id: int
     name: str
-    imgae: FilePath
+    image: FilePath
     date: Optional[str] = None
     merchant_store: Optional[str] = None
     purchase_category: Optional[str] = None
@@ -17,6 +17,6 @@ class ReceiptList(BaseModel):
     receipts: List[Receipt]
 
 
-class CreateReceiptResponse(BaseModel):
+class ReceiptIDResponse(BaseModel):
     receipt_id: int
     message: Optional[str] == "Receipt successfully created"

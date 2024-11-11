@@ -24,7 +24,7 @@ bump-my-version = "^0.19.3"
 
 [tool.poetry.group.mkdocs.dependencies]
 mkdocs = "^1.5.3"
-mkdocs-material = "^9.5.15"
+mkdocs-material = "^9.5.44"
 mike = "2.0.0"
 
 [tool.black]

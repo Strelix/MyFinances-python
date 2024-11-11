@@ -35,3 +35,19 @@ class ReceiptService(BaseService):
     def list_receipts(self) -> MyFinancesResponse[ReceiptList]:
         response = self._client._get(f"/receipts/list/")
         return MyFinancesResponse(**response.dict())
+
+    def delete_receipt(self, receipt_id: int) -> MyFinancesResponse[ReceiptIDResponse]:
+        response = self._client._delete(f"/receipts/{receipt_id}/delete")
+        return MyFinancesResponse(**response.dict())
+
+    def search_receipts(self, receipt_id: int = None, name: str = None, merchant_store: str = None) -> MyFinancesResponse[ReceiptList]:
+        params = {
+            "receipt_id": receipt_id,
+            "name": name,
+            "merchant_store": merchant_store
+        }
+
+        params = {key: value for key, value in params.items() if value is not None}
+
+        response = self._client._post("/receipts/search/", json=params)
+        return MyFinancesResponse(**response.dict())

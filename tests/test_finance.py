@@ -1,8 +1,8 @@
 import pytest
 from unittest.mock import Mock
 from myfinances import MyFinancesClient
-from myfinances.finance.invoices import InvoicesService, Invoice
-from myfinances.models import MyFinancesResponse
+from myfinances.finance.invoices import InvoicesService
+
 
 @pytest.fixture
 def mock_client():
@@ -222,14 +222,14 @@ def test_update_invoice(invoices_service, mock_client):
     assert response.meta.status_code == 200
     assert response.meta.message == "Invoices successfully updated"
 
-    # updated version of the list
+    # updated version
     updated_invoice_data = {
         "id": 1,
         "customer_id": "125",
         "amount": 100,
         "description": "Service fees",
         "due_date": "2024-12-31",
-        "status": "paid"  # Updated status
+        "status": "paid"
     }
 
     mock_get_response_data = {

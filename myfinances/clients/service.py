@@ -9,9 +9,9 @@ from myfinances.models import MyFinancesResponse
 
 class ClientsService(BaseService):
     def list_clients(
-        self,
-        order_by: Optional[str] = None,
-        search: Optional[str] = None
+            self,
+            order_by: Optional[str] = None,
+            search: Optional[str] = None
     ) -> MyFinancesResponse[ClientData]:
         """List clients under the specified team."""
         params = {}
@@ -24,16 +24,16 @@ class ClientsService(BaseService):
         return MyFinancesResponse(**response.dict())
 
     def create_client(
-        self,
-        name: str,
-        phone_number: Optional[str] = None,
-        email: Optional[EmailStr] = None,
-        company: Optional[str] = None,
-        contact_method: Optional[str] = None,
-        is_representative: bool = False,
-        address: Optional[str] = None,
-        city: Optional[str] = None,
-        country: Optional[str] = None
+            self,
+            name: str,
+            phone_number: Optional[str] = None,
+            email: Optional[EmailStr] = None,
+            company: Optional[str] = None,
+            contact_method: Optional[str] = None,
+            is_representative: bool = False,
+            address: Optional[str] = None,
+            city: Optional[str] = None,
+            country: Optional[str] = None
     ) -> MyFinancesResponse[ClientIdResponse]:
         """List clients under the specified team."""
         params = {
@@ -48,13 +48,12 @@ class ClientsService(BaseService):
             "country": country,
         }
 
-        response = self._client._post("/clients/create/", params)
+        response = self._client._post("/clients/create/", json=params)
 
         return MyFinancesResponse(**response.dict())
 
-
-    def get_client(self, client_id:int) -> MyFinancesResponse[Client]:
-        response = self._client.get(f"/clients/{client_id}")
+    def get_client(self, client_id: int) -> MyFinancesResponse[Client]:
+        response = self._client._get(f"/clients/{client_id}")
         return MyFinancesResponse(**response.dict())
 
     def update_client(self,
@@ -63,10 +62,10 @@ class ClientsService(BaseService):
                       email: Optional[EmailStr] = None,
                       company: Optional[str] = None,
                       contact_method: Optional[str] = None,
-                      is_representative: bool = False,
+                      is_representative: bool = None,
                       address: Optional[str] = None,
                       city: Optional[str] = None,
-                      country: Optional[str] = None) -> MyFinancesResponse[ClientIdResponse]:
+                      country: Optional[str] = None) -> MyFinancesResponse[Client]:
         params = {}
 
         if name is not None:
@@ -96,9 +95,9 @@ class ClientsService(BaseService):
         if country is not None:
             params["country"] = country
 
-        response = self._client._post("/clients/update/", params)
+        response = self._client._post("/clients/update/", json=params)
         return MyFinancesResponse(**response.dict())
 
-    def delete_client(self, client_id: int) -> MyFinancesResponse[ClientData]:
+    def delete_client(self, client_id: int) -> MyFinancesResponse[Client]:
         response = self._client._delete(f"/clients/{client_id}/delete")
         return MyFinancesResponse(**response.dict())

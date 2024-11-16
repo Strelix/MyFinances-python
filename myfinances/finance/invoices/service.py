@@ -30,24 +30,31 @@ class InvoicesService(BaseService):
         return MyFinancesResponse(**response.dict())
 
     def search_invoices(self, customer_id: int = None, status: str = None) -> MyFinancesResponse[InvoiceList]:
-        params = {
-            "customer_id": customer_id,
-            "status": status
-        }
+        params = {}
 
-        params = {key: value for key, value in params.items() if value is not None}
+        if customer_id is not None:
+            params["customer_id"] = customer_id
+
+        if status is not None:
+            params["status"] = status
 
         response = self._client._get(f"/invoices/search", params=params)
         return MyFinancesResponse(**response.dict())
 
-    def update_invoice(self, invoice_id: int, amount: float = None, description: str = None, due_date: str = None ) -> MyFinancesResponse[CreateInvoiceResponse]:
-        payload = {
-            "amount": amount,
-            "description": description,
-            "due_date": due_date,
-        }
+    def update_invoice(self, customer_id: int, amount: float = None, description: str = None, due_date: str = None, status: str = None ) -> MyFinancesResponse[Invoice]:
+        params = {}
 
-        payload = {key: value for key, value in payload.items() if value is not None }
+        if amount is not None:
+            params["amount"] = amount
 
-        response = self._client._post(f"/invoices/{invoice_id}/update", json=payload)
+        if description is not None:
+            params["description"] = description
+
+        if due_date is not None:
+            params["due_date"] = due_date
+
+        if status is not None:
+            params["status"] = status
+
+        response = self._client._post(f"/invoices/{customer_id}/update", json=params)
         return MyFinancesResponse(**response.dict())

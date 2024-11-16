@@ -58,7 +58,7 @@ class ClientsService(BaseService):
         return MyFinancesResponse(**response.dict())
 
     def update_client(self,
-                      name: str,
+                      name: str = None,
                       phone_number: Optional[str] = None,
                       email: Optional[EmailStr] = None,
                       company: Optional[str] = None,
@@ -67,21 +67,36 @@ class ClientsService(BaseService):
                       address: Optional[str] = None,
                       city: Optional[str] = None,
                       country: Optional[str] = None) -> MyFinancesResponse[ClientIdResponse]:
-        params = {
-            "name": name,
-            "phone_number": phone_number,
-            "email": email,
-            "company": company,
-            "contact_method": contact_method,
-            "is_representative": is_representative,
-            "address": address,
-            "city": city,
-            "country": country,
-        }
+        params = {}
 
-        params = {key: value for key, value in params.items() if value is not None}
+        if name is not None:
+            params["name"] = name
 
-        response = self._client._put("/clients/update/", params)
+        if phone_number is not None:
+            params["phone_number"] = phone_number
+
+        if email is not None:
+            params["email"] = email
+
+        if company is not None:
+            params["company"] = company
+
+        if contact_method is not None:
+            params["contact_method"] = contact_method
+
+        if is_representative is not None:
+            params["is_representative"] = is_representative
+
+        if address is not None:
+            params["address"] = address
+
+        if city is not None:
+            params["city"] = city
+
+        if country is not None:
+            params["country"] = country
+
+        response = self._client._post("/clients/update/", params)
         return MyFinancesResponse(**response.dict())
 
     def delete_client(self, client_id: int) -> MyFinancesResponse[ClientData]:

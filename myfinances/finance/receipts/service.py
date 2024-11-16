@@ -33,21 +33,41 @@ class ReceiptService(BaseService):
         return MyFinancesResponse(**response.dict())
 
     def list_receipts(self) -> MyFinancesResponse[ReceiptList]:
-        response = self._client._get(f"/receipts/list/")
+        response = self._client._get("/receipts/")
         return MyFinancesResponse(**response.dict())
 
     def delete_receipt(self, receipt_id: int) -> MyFinancesResponse[ReceiptIDResponse]:
         response = self._client._delete(f"/receipts/{receipt_id}/delete")
         return MyFinancesResponse(**response.dict())
 
-    def search_receipts(self, receipt_id: int = None, name: str = None, merchant_store: str = None) -> MyFinancesResponse[ReceiptList]:
-        params = {
-            "receipt_id": receipt_id,
-            "name": name,
-            "merchant_store": merchant_store
-        }
+    def search_receipts(self, receipt_id: int = None, name: str = None, merchant_store: str = None,
+                        image: Optional[FilePath] = None,  date: Optional[str] = None, purchase_category: Optional[str] = None,
+                       total_amount: float = None, owner: Optional[str] = None ) -> MyFinancesResponse[ReceiptList]:
+        params = {}
 
-        params = {key: value for key, value in params.items() if value is not None}
+        if receipt_id is not None:
+            params["id"] = receipt_id
 
-        response = self._client._post("/receipts/search/", json=params)
+        if name is not None:
+            params["name"] = name
+
+        if merchant_store is not None:
+            params["merchant_store"] = merchant_store
+
+        if image is not None:
+            params["image"] = image
+
+        if date is not None:
+            params["date"] = date
+
+        if purchase_category is not None:
+            params["purchase_category"] = purchase_category
+
+        if total_amount is not None:
+            params["total_amount"] = total_amount
+
+        if owner is not None:
+            params["owner"] = owner
+
+        response = self._client._get("/receipts/search/", params=params)
         return MyFinancesResponse(**response.dict())

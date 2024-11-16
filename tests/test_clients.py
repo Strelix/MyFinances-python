@@ -3,7 +3,6 @@ from unittest.mock import Mock
 
 from myfinances import MyFinancesClient
 from myfinances.clients.service import ClientsService
-from myfinances.clients.models import ClientIdResponse, ClientData
 
 
 @pytest.fixture
@@ -38,7 +37,7 @@ def test_create_client(clients_service, mock_client):
             "success": True,
             "status_code": 200,
             "message": "Success"
-        },  # Include the meta field
+        },
         "data": {"client_id": 123}
     }
 
@@ -168,7 +167,6 @@ def test_delete_clients(clients_service, mock_client):
     remaining_clients = [clients for clients in clients_data if clients["id"] == Client_Id]
     assert len(remaining_clients) == 1
     assert remaining_clients[0]["id"] == Client_Id
-
 
 
 def test_update_clients_name(clients_service, mock_client):

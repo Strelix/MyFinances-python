@@ -19,4 +19,3 @@ class ReceiptList(BaseModel):
 
 class ReceiptIDResponse(BaseModel):
     receipt_id: int
-    message: Optional[str] == "Receipt successfully created"

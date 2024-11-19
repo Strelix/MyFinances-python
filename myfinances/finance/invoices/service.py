@@ -56,5 +56,5 @@ class InvoicesService(BaseService):
         if status is not None:
             params["status"] = status
 
-        response = self._client._post(f"/invoices/{customer_id}/update", json=params)
+        response = self._client._patch(f"/invoices/{customer_id}/update", json=params)
         return MyFinancesResponse(**response.dict())

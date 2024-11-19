@@ -210,13 +210,13 @@ def test_update_invoice(invoices_service, mock_client):
 
     mock_response = Mock()
     mock_response.dict.return_value = mock_response_data
-    mock_client._post.return_value = mock_response
+    mock_client._patch = Mock(return_value=mock_response)
 
     new_status = "paid"
 
     response = invoices_service.update_invoice(1, status=new_status)
 
-    mock_client._post.assert_called_once_with(f"/invoices/1/update", json={"status": new_status})
+    mock_client._patch.assert_called_once_with(f"/invoices/1/update", json={"status": new_status})
 
     assert response.meta.success is True
     assert response.meta.status_code == 200

@@ -95,7 +95,7 @@ class ClientsService(BaseService):
         if country is not None:
             params["country"] = country
 
-        response = self._client._post("/clients/update/", json=params)
+        response = self._client._patch("/clients/update/", json=params)
         return MyFinancesResponse(**response.dict())
 
     def delete_client(self, client_id: int) -> MyFinancesResponse[Client]:

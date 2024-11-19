@@ -58,7 +58,7 @@ def test_list_invoices(invoices_service, mock_client):
         "meta": {
             "success": True,
             "status_code": 200,
-            "message": "Successfully created"
+            "message": "Successfully fetched invoices"
         },
         "data": invoice_list
     }
@@ -101,7 +101,7 @@ def test_delete_invoice(invoices_service, mock_client):
     mock_response = Mock()
     mock_response.dict.return_value = mock_response_data
 
-    mock_client._delete = Mock(return_value=mock_response)
+    mock_client._delete.return_value = mock_response
 
     invoice_id = 1
 
@@ -210,7 +210,7 @@ def test_update_invoice(invoices_service, mock_client):
 
     mock_response = Mock()
     mock_response.dict.return_value = mock_response_data
-    mock_client._patch = Mock(return_value=mock_response)
+    mock_client._patch.return_value = mock_response
 
     new_status = "paid"
 

@@ -149,7 +149,7 @@ def test_delete_clients(clients_service, mock_client):
 
     mock_response = Mock()
     mock_response.dict.return_value = mock_response_data
-    mock_client._delete = Mock(return_value=mock_response)
+    mock_client._delete.return_value = mock_response
 
     Client_Id = 1
     response = clients_service.delete_client(Client_Id)
@@ -189,7 +189,7 @@ def test_update_clients_name(clients_service, mock_client):
 
     mock_response = Mock()
     mock_response.dict.return_value = mock_response_data
-    mock_client._patch = Mock(return_value=mock_response)
+    mock_client._patch.return_value = mock_response
 
     new_name = "Client 3"
     response = clients_service.update_client(name=new_name)

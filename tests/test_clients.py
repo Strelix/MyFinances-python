@@ -34,7 +34,6 @@ def test_create_client(clients_service, mock_client):
         "meta": {
             "success": True,
             "status_code": 200,
-            "message": "Success"
         },
         "data": {"client_id": 123}
     }
@@ -45,11 +44,10 @@ def test_create_client(clients_service, mock_client):
 
     response = clients_service.create_client(**clients_data)
 
-    mock_client._post.assert_called_once_with("/clients/create/", clients_data)
+    mock_client._post.assert_called_once_with("/clients/create/", json=clients_data)
     assert response.data["client_id"] == 123
     assert response.meta.success is True
     assert response.meta.status_code == 200
-    assert response.meta.message == "Success"
 
 
 def test_list_clients(clients_service, mock_client):
@@ -66,7 +64,6 @@ def test_list_clients(clients_service, mock_client):
         "meta": {
             "success": True,
             "status_code": 200,
-            "message": "Success"
         },
         "data": clients_data
     }
@@ -80,7 +77,6 @@ def test_list_clients(clients_service, mock_client):
     mock_client._get.assert_called_once_with("/clients/", params={})
     assert response.meta.success is True
     assert response.meta.status_code == 200
-    assert response.meta.message == "Success"
 
     assert isinstance(response.data, list)
     assert len(response.data) == 2
@@ -105,7 +101,6 @@ def test_client_by_id(clients_service, mock_client):
         "meta": {
             "success": True,
             "status_code": 200,
-            "message": "Success"
         },
         "data": clients_data
     }
@@ -120,7 +115,6 @@ def test_client_by_id(clients_service, mock_client):
     mock_client._get.assert_called_once_with(f"/clients/{clients_id}")
     assert response.meta.success is True
     assert response.meta.status_code == 200
-    assert response.meta.message == "Success"
 
     assert response.data["id"] == clients_data["id"]
     assert response.data["name"] == clients_data["name"]
@@ -142,7 +136,6 @@ def test_delete_clients(clients_service, mock_client):
         "meta": {
             "success": True,
             "status_code": 200,
-            "message": "Success"
         },
         "data": clients_data
     }
@@ -157,7 +150,6 @@ def test_delete_clients(clients_service, mock_client):
     mock_client._delete.assert_called_once_with(f"/clients/{Client_Id}/delete")
     assert response.meta.success is True
     assert response.meta.status_code == 200
-    assert response.meta.message == "Success"
 
     remaining_clients = [clients for clients in clients_data if clients["id"] == Client_Id]
     assert len(remaining_clients) == 1
@@ -182,7 +174,6 @@ def test_update_clients_name(clients_service, mock_client):
         "meta": {
             "success": True,
             "status_code": 200,
-            "message": "Success"
         },
         "data": clients_data
     }
@@ -197,7 +188,6 @@ def test_update_clients_name(clients_service, mock_client):
     mock_client._patch.assert_called_once_with(f"/clients/update/", json={"name": new_name})
     assert response.meta.success is True
     assert response.meta.status_code == 200
-    assert response.meta.message == "Success"
 
     # Updated Version
     updated_clients_data = {
@@ -217,7 +207,6 @@ def test_update_clients_name(clients_service, mock_client):
         "meta": {
             "success": True,
             "status_code": 200,
-            "message": "Success"
         },
         "data": updated_clients_data
     }

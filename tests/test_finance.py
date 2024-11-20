@@ -27,7 +27,6 @@ def test_create_invoice(invoices_service, mock_client):
         "meta": {
             "success": True,
             "status_code": 200,
-            "message": "Successfully created"
         },
         "data": {
             "invoice_id": 102,
@@ -44,7 +43,6 @@ def test_create_invoice(invoices_service, mock_client):
     assert response.data["invoice_id"] == 102
     assert response.meta.success is True
     assert response.meta.status_code == 200
-    assert response.meta.message == "Successfully created"
 
 
 def test_list_invoices(invoices_service, mock_client):
@@ -58,7 +56,6 @@ def test_list_invoices(invoices_service, mock_client):
         "meta": {
             "success": True,
             "status_code": 200,
-            "message": "Successfully fetched invoices"
         },
         "data": invoice_list
     }
@@ -73,7 +70,6 @@ def test_list_invoices(invoices_service, mock_client):
 
     assert response.meta.success is True
     assert response.meta.status_code == 200
-    assert response.meta.message == "Successfully fetched invoices"
 
     assert isinstance(response.data, list)
     assert len(response.data) == 2
@@ -93,7 +89,6 @@ def test_delete_invoice(invoices_service, mock_client):
         "meta": {
             "success": True,
             "status_code": 200,
-            "message": "Successfully deleted invoice"
         },
         "data": invoice_list
     }
@@ -111,7 +106,6 @@ def test_delete_invoice(invoices_service, mock_client):
 
     assert response.meta.success is True
     assert response.meta.status_code == 200
-    assert response.meta.message == "Successfully deleted invoice"
 
     remaining_invoices = [invoice for invoice in invoice_list if invoice['id'] != invoice_id]
 
@@ -132,7 +126,6 @@ def test_get_invoice(invoices_service, mock_client):
         "meta": {
             "success": True,
             "status_code": 200,
-            "message": "Successfully deleted invoice"
         },
         "data": invoice_data
     }
@@ -148,7 +141,6 @@ def test_get_invoice(invoices_service, mock_client):
 
     assert response.meta.success is True
     assert response.meta.status_code == 200
-    assert response.meta.message == "Successfully deleted invoice"
 
     assert response.data["id"] == invoice_data["id"]
     assert response.data["customer_id"] == invoice_data["customer_id"]
@@ -167,7 +159,6 @@ def test_search_invoices_by_id(invoices_service, mock_client):
         "meta": {
             "success": True,
             "status_code": 200,
-            "message": "Invoices fetched successfully"
         },
         "data": invoice_data
     }
@@ -183,7 +174,6 @@ def test_search_invoices_by_id(invoices_service, mock_client):
 
     assert response.meta.success is True
     assert response.meta.status_code == 200
-    assert response.meta.message == "Invoices fetched successfully"
 
     assert response.data[1]["id"] == 2
     assert response.data[1]["customer_id"] == 124
@@ -203,7 +193,6 @@ def test_update_invoice(invoices_service, mock_client):
         "meta": {
             "success": True,
             "status_code": 200,
-            "message": "Invoices successfully updated"
         },
         "data": invoice_data
     }
@@ -220,7 +209,6 @@ def test_update_invoice(invoices_service, mock_client):
 
     assert response.meta.success is True
     assert response.meta.status_code == 200
-    assert response.meta.message == "Invoices successfully updated"
 
     # updated version
     updated_invoice_data = {
@@ -236,7 +224,6 @@ def test_update_invoice(invoices_service, mock_client):
         "meta": {
             "success": True,
             "status_code": 200,
-            "message": "Invoice fetched successfully"
         },
         "data": updated_invoice_data
     }

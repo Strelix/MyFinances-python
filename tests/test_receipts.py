@@ -3,6 +3,7 @@ from unittest.mock import Mock
 from myfinances import MyFinancesClient
 from myfinances.finance.receipts.service import ReceiptService
 
+
 @pytest.fixture
 def mock_client():
     mock = Mock(spec=MyFinancesClient)
@@ -30,7 +31,6 @@ def test_create_receipt(receipts_service, mock_client):
         "meta": {
             "success": True,
             "status_code": 200,
-            "message": "Success"
         },
         "data": receipts_data
     }
@@ -44,7 +44,6 @@ def test_create_receipt(receipts_service, mock_client):
     mock_client._post.assert_called_once_with("/receipts/create/", json=receipts_data)
     assert response.meta.success is True
     assert response.meta.status_code == 200
-    assert response.meta.message == "Success"
 
     assert response.data["name"] == receipts_data["name"]
     assert response.data["image"] == receipts_data["image"]
@@ -62,7 +61,6 @@ def test_list_receipts(receipts_service, mock_client):
         "meta": {
             "success": True,
             "status_code": 200,
-            "message": "Success"
         },
         "data": list_of_receipts
     }
@@ -71,12 +69,10 @@ def test_list_receipts(receipts_service, mock_client):
     mock_response.dict.return_value = mock_response_data
     mock_client._get.return_value = mock_response
 
-
     response = receipts_service.list_receipts()
     mock_client._get.assert_called_once_with("/receipts/")
     assert response.meta.success is True
     assert response.meta.status_code == 200
-    assert response.meta.message == "Success"
 
     assert isinstance(response.data, list)
     assert len(response.data) == 2
@@ -94,7 +90,6 @@ def test_delete_receipt(receipts_service, mock_client):
         "meta": {
             "success": True,
             "status_code": 200,
-            "message": "Successfully deleted invoice"
         },
         "data": list_of_receipts
     }
@@ -112,7 +107,6 @@ def test_delete_receipt(receipts_service, mock_client):
 
     assert response.meta.success is True
     assert response.meta.status_code == 200
-    assert response.meta.message == "Successfully deleted invoice"
 
     remaining_receipts = [receipt for receipt in list_of_receipts if receipt["id"] != receipt_id]
     assert len(remaining_receipts) == 1
@@ -131,7 +125,6 @@ def test_update_receipt(receipts_service, mock_client):
         "meta": {
             "success": True,
             "status_code": 200,
-            "message": "Success"
         },
         "data": list_of_receipts
     }
@@ -146,6 +139,5 @@ def test_update_receipt(receipts_service, mock_client):
 
     assert response.meta.success is True
     assert response.meta.status_code == 200
-    assert response.meta.message == "Success"
 
     assert response.data[1]["name"] == search_name

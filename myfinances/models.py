@@ -9,7 +9,6 @@ T = TypeVar('T')
 class Meta(BaseModel):
     success: bool
     status_code: int
-    message: str
     content: dict = None
 
 

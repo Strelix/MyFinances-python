@@ -53,6 +53,16 @@ class ClientsService(BaseService):
         return MyFinancesResponse(**response.dict())
 
     def get_client(self, client_id: int) -> MyFinancesResponse[Client]:
+        """
+        Retrieving a singular client via their client_id.
+
+        Args:
+            client_id (int): The ID of the client to retrieve.
+
+        Returns:
+              MyFinancesResponse[Client]: Data of the client's details.
+
+        """
         response = self._client._get(f"/clients/{client_id}")
         return MyFinancesResponse(**response.dict())
 
@@ -62,38 +72,23 @@ class ClientsService(BaseService):
                       email: Optional[EmailStr] = None,
                       company: Optional[str] = None,
                       contact_method: Optional[str] = None,
-                      is_representative: bool = None,
+                      is_representative: Optional[bool] = None,
                       address: Optional[str] = None,
                       city: Optional[str] = None,
                       country: Optional[str] = None) -> MyFinancesResponse[Client]:
-        params = {}
-
-        if name is not None:
-            params["name"] = name
-
-        if phone_number is not None:
-            params["phone_number"] = phone_number
-
-        if email is not None:
-            params["email"] = email
-
-        if company is not None:
-            params["company"] = company
-
-        if contact_method is not None:
-            params["contact_method"] = contact_method
-
-        if is_representative is not None:
-            params["is_representative"] = is_representative
-
-        if address is not None:
-            params["address"] = address
-
-        if city is not None:
-            params["city"] = city
-
-        if country is not None:
-            params["country"] = country
+        params = {
+            key: value for key, value in{
+                "name": name,
+                "phone_number": phone_number,
+                "email": email,
+                "company": company,
+                "contact_method": contact_method,
+                "is_representative": is_representative,
+                "address": address,
+                "city": city,
+                "country": country,
+            }.items() if value is not None
+        }
 
         response = self._client._patch("/clients/update/", json=params)
         return MyFinancesResponse(**response.dict())

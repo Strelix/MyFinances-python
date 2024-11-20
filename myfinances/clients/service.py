@@ -76,6 +76,23 @@ class ClientsService(BaseService):
                       address: Optional[str] = None,
                       city: Optional[str] = None,
                       country: Optional[str] = None) -> MyFinancesResponse[Client]:
+        """
+        Updating an existing client's details, with the provided parameters
+
+        Args:
+            name (Optional[str]): name of the client to update
+            phone_number (Optional[str]): client's phone number to update
+            email (Optional[EmailStr]): client's email address to update
+            company (Optional[str]): client's company name to update
+            contact_method (Optional[str]): client's preferred contact to update
+            is_representative (Optional[bool]): to update the client if they are representative
+            address (Optional[str]): client's address to update
+            city (Optional[str]): client's location in the city to update
+            country (Optional[str]): client's country location to update
+
+        Returns:
+            MyFinancesResponse[Client]: Data of the client's details is updated
+        """
         params = {
             key: value for key, value in{
                 "name": name,
@@ -94,5 +111,14 @@ class ClientsService(BaseService):
         return MyFinancesResponse(**response.dict())
 
     def delete_client(self, client_id: int) -> MyFinancesResponse[Client]:
+        """
+        Deletion of a specific client
+
+        Args:
+            client_id (int): client's id
+
+        Returns:
+            MyFinancesResponse[Client]: Confirming the deletion of the client
+        """
         response = self._client._delete(f"/clients/{client_id}/delete")
         return MyFinancesResponse(**response.dict())

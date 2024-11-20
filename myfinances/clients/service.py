@@ -94,7 +94,7 @@ class ClientsService(BaseService):
             MyFinancesResponse[Client]: Data of the client's details is updated
         """
         params = {
-            key: value for key, value in{
+            key: value for key, value in {
                 "name": name,
                 "phone_number": phone_number,
                 "email": email,

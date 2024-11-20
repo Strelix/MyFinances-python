@@ -18,13 +18,13 @@ def receipts_service(mock_client):
 
 def test_create_receipt(receipts_service, mock_client):
     receipts_data = {
-        "name": "Client  1",
+        "name": "Client 1",
         "image": "file_example",
         "date": "2024-05-21",
         "merchant_store": "Store 1",
         "purchase_category": "Purchase 1",
         "total_amount": 500,
-        "owner": "Client  2"
+        "owner": "Client 2"
     }
 
     mock_response_data = {
@@ -113,7 +113,7 @@ def test_delete_receipt(receipts_service, mock_client):
     assert remaining_receipts[0]["id"] == 1
 
 
-def test_update_receipt(receipts_service, mock_client):
+def test_search_receipt(receipts_service, mock_client):
     list_of_receipts = [
         {"id": 1, "name": "Client  1", "image": "file_example", "date": "2024-05-21",
          "merchant_store": "Store 1", "purchase_category": "Purchase 1", "total_amount": 100, "owner": "Owner 1"},

@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "MyFinances"
-version = "0.1.0"
+version = "0.1.1"
 description = ""
 authors = ["TreyWW"]
 readme = "README.md"
@@ -71,7 +71,7 @@ Homepage = "https://github.com/Strelix/MyFinances-python"
 Issues = "https://github.com/Strelix/MyFinances-python/issues"
 
 [tool.bumpversion]
-current_version = "0.1.0"
+current_version = "0.1.1"
 commit = true
 commit_args = "-s"
 tag = true

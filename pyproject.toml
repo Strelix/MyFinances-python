@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "MyFinances-python"
+name = "MyFinances"
 version = "0.1.0"
 description = ""
 authors = ["TreyWW"]
@@ -36,7 +36,7 @@ build-backend = 'setuptools.build_meta'
 
 
 [project]
-name = "MyFinances-python"
+name = "MyFinances"
 description = "A python client package to interact with the MyFinances API through python."
 readme = "README.md"
 authors = [

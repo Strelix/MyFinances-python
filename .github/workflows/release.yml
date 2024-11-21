@@ -3,27 +3,17 @@ on:
   push:
     tags:
       - v*
+  workflow_dispatch:
+    inputs:
+      version:
+        type: string
+        description: Version
+        required: true
 
 jobs:
-  test:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [ ubuntu-latest ]
-        python-version: [ "3.10", "3.11", "3.12" ]
-        django-version: [ 4, 5 ]
-    steps:
-      - uses: actions/checkout@v4
-
-      - uses: ./.github/actions/test
-        with:
-          python-version: ${{ matrix.python-version }}
-          django-version: ${{ matrix.django-version }}
-
   release:
     runs-on: ubuntu-latest
-    needs: [test]
+    environment: PiPi
     steps:
       - uses: actions/checkout@v4
       - name: Setup python
@@ -43,5 +33,3 @@ jobs:
 
       - name: Release
         uses: pypa/gh-action-pypi-publish@release/v1
-        with:
-          password: ${{ secrets.PYPI_API_TOKEN }}

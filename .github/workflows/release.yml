@@ -4,11 +4,6 @@ on:
     tags:
       - v*
   workflow_dispatch:
-    inputs:
-      version:
-        type: string
-        description: Version
-        required: true
 
 jobs:
   release:

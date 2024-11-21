@@ -1,5 +1,5 @@
 dev_addr: 127.0.0.1:3000
-site_name: Django Umami
+site_name: MyFinances
 theme:
   name: material
   custom_dir: docs/overrides
@@ -74,16 +74,17 @@ markdown_extensions:
       emoji_index: !!python/name:material.extensions.emoji.twemoji
       emoji_generator: !!python/name:material.extensions.emoji.to_svg
 
-repo_name: django-umami
-repo_url: https://github.com/TreyWW/django-umami
+repo_name: MyFinances-Python
+repo_url: https://github.com/Strelix/MyFinances-python/
 
-site_url: https://docs.strelix.org/django-umami/
+#site_url: https://docs.strelix.org/django-umami/
 
-site_description: Documentation for django-umami
+site_description: The MyFinances Python Client provides a seamless way to interact with the MyFinances API for creating invoices, managing customers, and handling other finance-related operations directly from your Python code.
+
 site_author: treyww
 
 nav:
-  - Django Umami:
+  - MyFinances:
       - index.md
   - User Guide:
       - user-guide/getting-started/index.md

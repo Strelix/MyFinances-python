@@ -77,7 +77,7 @@ markdown_extensions:
 repo_name: MyFinances-Python
 repo_url: https://github.com/Strelix/MyFinances-python/
 
-#site_url: https://docs.strelix.org/django-umami/
+site_url: https://docs-py.myfinances.cloud/
 
 site_description: The MyFinances Python Client provides a seamless way to interact with the MyFinances API for creating invoices, managing customers, and handling other finance-related operations directly from your Python code.
 

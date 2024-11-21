@@ -2,7 +2,11 @@ name: Publish Documentation
 on:
   push:
     branches:
-      - master
+      - main
+    paths:
+      - docs/**
+      - .github/workflows/docs.yml
+      - ./mkdocs.yml
 
 # only run one build doc workflow at a time, cancel any running ones
 concurrency:

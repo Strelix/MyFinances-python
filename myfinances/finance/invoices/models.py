@@ -10,11 +10,13 @@ class Invoice(BaseModel):
     due_date: Optional[str] = None
     description: Optional[str] = None
 
+
 class CreateInvoiceResponse(BaseModel):
     customer_id: int
     amount: condecimal(gt=0)
     description: Optional[str] = None
     due_date: Optional[str] = None
+
 
 class InvoiceList(BaseModel):
     invoices: List[Invoice]

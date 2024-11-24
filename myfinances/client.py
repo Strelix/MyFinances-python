@@ -32,5 +32,18 @@ class MyFinancesClient:
         response = self.session.post(url, json=json, headers=headers)
         return MyFinancesResponse.from_http_response(response)
 
+    def _patch(self, endpoint: str, json: dict):
+        url = f"{self.base_url}{endpoint}"
+        headers = {"Authorization": f"Bearer {self.api_key}"}
+
+        response = self.session.patch(url, json=json, headers=headers)
+        return MyFinancesResponse.from_http_response(response)
+
+    def _delete(self, endpoint: str):
+        url = f"{self.base_url}{endpoint}"
+        headers = {"Authorization": f"Bearer {self.api_key}"}
+
+        response = self.session.delete(url, headers=headers)
+        return MyFinancesResponse.from_http_response(response)
     def close(self):
         self.session.close()

@@ -9,7 +9,7 @@ def main():
     response = client.clients.list_clients()
     print(response.json())
 
-    response = client.clients.create_client(name="nerd")
+    response = client.clients.create_client(name="dock")
 
     print(f"Created user with the ID of {response.data.client_id}")
 
@@ -17,6 +17,8 @@ def main():
     #
     response = client.clients.list_clients()
     print(response.json())
+
+
 
 if __name__ == "__main__":
     main()

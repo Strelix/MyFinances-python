@@ -9,7 +9,7 @@ T = TypeVar('T')
 class Meta(BaseModel):
     success: bool
     status_code: int
-    content: dict = None
+    content: Optional[str] = None
 
 
 class MyFinancesResponse(BaseModel, Generic[T]):

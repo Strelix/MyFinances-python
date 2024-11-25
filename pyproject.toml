@@ -18,7 +18,7 @@ email-validator = "^2.2.0"
 
 [tool.poetry.group.dev.dependencies]
 black = "^24.10.0"
-coverage = "^7.4.4"
+coverage = "^7.6.8"
 bump-my-version = "^0.19.3"
 
 
